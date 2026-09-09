@@ -116,8 +116,8 @@ export type TtsOptions = {
   voice_id: string;
   language: LangCode;
   auto_emotion: boolean;
-  model_id?: string;
-  emotion_override?: string | null;
+  model_id?: string | undefined;
+  emotion_override?: string | null | undefined;
 };
 
 export type TtsResult = {
