@@ -10,33 +10,76 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicV1EmotionRouteImport } from './routes/api/public/v1/emotion'
+import { Route as ApiPublicV1TtsRouteImport } from './routes/api/public/v1/tts'
+import { Route as ApiPublicV1VoicesRouteImport } from './routes/api/public/v1/voices'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicV1EmotionRoute = ApiPublicV1EmotionRouteImport.update({
+  id: '/api/public/v1/emotion',
+  path: '/api/public/v1/emotion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1TtsRoute = ApiPublicV1TtsRouteImport.update({
+  id: '/api/public/v1/tts',
+  path: '/api/public/v1/tts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicV1VoicesRoute = ApiPublicV1VoicesRouteImport.update({
+  id: '/api/public/v1/voices',
+  path: '/api/public/v1/voices',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/public/v1/emotion': typeof ApiPublicV1EmotionRoute
+  '/api/public/v1/tts': typeof ApiPublicV1TtsRoute
+  '/api/public/v1/voices': typeof ApiPublicV1VoicesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/public/v1/emotion': typeof ApiPublicV1EmotionRoute
+  '/api/public/v1/tts': typeof ApiPublicV1TtsRoute
+  '/api/public/v1/voices': typeof ApiPublicV1VoicesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/public/v1/emotion': typeof ApiPublicV1EmotionRoute
+  '/api/public/v1/tts': typeof ApiPublicV1TtsRoute
+  '/api/public/v1/voices': typeof ApiPublicV1VoicesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/api/public/v1/emotion'
+    | '/api/public/v1/tts'
+    | '/api/public/v1/voices'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/api/public/v1/emotion'
+    | '/api/public/v1/tts'
+    | '/api/public/v1/voices'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/public/v1/emotion'
+    | '/api/public/v1/tts'
+    | '/api/public/v1/voices'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiPublicV1EmotionRoute: typeof ApiPublicV1EmotionRoute
+  ApiPublicV1TtsRoute: typeof ApiPublicV1TtsRoute
+  ApiPublicV1VoicesRoute: typeof ApiPublicV1VoicesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +91,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/v1/emotion': {
+      id: '/api/public/v1/emotion'
+      path: '/api/public/v1/emotion'
+      fullPath: '/api/public/v1/emotion'
+      preLoaderRoute: typeof ApiPublicV1EmotionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/tts': {
+      id: '/api/public/v1/tts'
+      path: '/api/public/v1/tts'
+      fullPath: '/api/public/v1/tts'
+      preLoaderRoute: typeof ApiPublicV1TtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/v1/voices': {
+      id: '/api/public/v1/voices'
+      path: '/api/public/v1/voices'
+      fullPath: '/api/public/v1/voices'
+      preLoaderRoute: typeof ApiPublicV1VoicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiPublicV1EmotionRoute: ApiPublicV1EmotionRoute,
+  ApiPublicV1TtsRoute: ApiPublicV1TtsRoute,
+  ApiPublicV1VoicesRoute: ApiPublicV1VoicesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
